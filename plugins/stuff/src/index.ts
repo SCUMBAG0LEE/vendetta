@@ -15,7 +15,7 @@ function sendReply(channelID, content, embed) {
     const msg = BotMessage.createBotMessage({ channelId: channel, content: '', embeds: embed });
     msg.author.username = 'Homie';
     msg.author.avatar = 'SUSV';
-    Avatars.BOT_AVATARS.SUSV = 'https://www.tynker.com/projects/screenshot/6138be9044223d53fb37fae0/cat-sus.png';
+    Avatars.BOT_AVATARS.SUSV = 'https://pbs.twimg.com/media/Eys2THcXMAYPius.jpg';
 
     if (typeof content === 'string') {
         msg.content = content;
