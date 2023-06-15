@@ -72,6 +72,7 @@ commands.push(registerCommand({
            }
             
             let response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json());
+            response = response.data?.children?.[Math.floor(Math.random() * response.data?.children?.length)]?.data;
 
             if (silent ?? true) 
             {
