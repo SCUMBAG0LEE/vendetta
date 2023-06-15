@@ -15,7 +15,7 @@ function sendReply(channelID, content, embed) {
     const msg = BotMessage.createBotMessage({ channelId: channel, content: '', embeds: embed });
     msg.author.username = 'cat';
     msg.author.avatar = 'cat';
-    Avatars.BOT_AVATARS.car = 'https://img.ifunny.co/images/e23b757ebd4966ea428f5db8245909ce8cc6dbfa5350c643c934fffbaae44e50_1.jpg';
+    Avatars.BOT_AVATARS.cat = 'https://img.ifunny.co/images/e23b757ebd4966ea428f5db8245909ce8cc6dbfa5350c643c934fffbaae44e50_1.jpg';
 
     if (typeof content === 'string') {
         msg.content = content;
@@ -30,8 +30,8 @@ function sendReply(channelID, content, embed) {
 let commands = []
 
 commands.push(registerCommand({
-    name: "hentai",
-    displayName: "hentai",
+    name: "stuff",
+    displayName: "stuff",
     description: "Get a hentai image",
     displayDescription: "Get a hentai image",
     options: [{
