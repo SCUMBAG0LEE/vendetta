@@ -1,0 +1,14 @@
+{
+    "name": "stuff",
+    "description": "just some stuff",
+    "authors": [
+        {
+            "name": "accismus_zeta",
+            "id": "544033845222178816"
+        }
+    ],
+    "main": "src/index.ts",
+    "vendetta": {
+        "icon": "games"
+    }
+}
