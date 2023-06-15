@@ -2,7 +2,7 @@
 import { registerCommand } from "@vendetta/commands"
 import { logger } from "@vendetta";
 import { findByProps } from "@vendetta/metro"
-import Settings from "./Settings";
+import Settings from "./settings";
 import { storage } from '@vendetta/plugin';
 
 const MessageActions = findByProps("sendMessage", "receiveMessage")
@@ -13,9 +13,9 @@ const Avatars = findByProps("BOT_AVATARS")
 function sendReply(channelID, content, embed) {
     const channel = channelID ?? Channels?.getChannelId?.();
     const msg = BotMessage.createBotMessage({ channelId: channel, content: '', embeds: embed });
-    msg.author.username = 'Astolfo';
-    msg.author.avatar = 'Astolfo';
-    Avatars.BOT_AVATARS.Astolfo = 'https://i.pinimg.com/736x/50/77/1f/50771f45b1c015cfbb8b0853ba7b8521.jpg';
+    msg.author.username = 'pusi';
+    msg.author.avatar = 'cat';
+    Avatars.BOT_AVATARS.cat = 'https://www.tynker.com/projects/screenshot/6138be9044223d53fb37fae0/cat-sus.png';
 
     if (typeof content === 'string') {
         msg.content = content;
@@ -30,15 +30,15 @@ function sendReply(channelID, content, embed) {
 let commands = []
 
 commands.push(registerCommand({
-    name: "rule34",
-    displayName: "rule34",
-    description: "Get an rule34 image",
-    displayDescription: "Get a rule34 image",
+    name: "hentai",
+    displayName: "hentai",
+    description: "Get a hentai content",
+    displayDescription: "Get a hentai content",
     options: [{
         name: "nsfw",
         displayName: "nsfw",
-        description: "Get the result from r/hentai instead of r/rule34",
-        displayDescription: "Get the result from r/hentai instead of r/rule34",
+        description: "will do nothing",
+        displayDescription: "did nothing",
         required: false,
         type: 5
     }, {
@@ -76,7 +76,7 @@ commands.push(registerCommand({
                 sendReply(ctx.channel.id, "This channel is not marked as NSFW\n(You can disable this check in plugin settings)", [])
                 return
             }
-            if (nsfw) { response = await fetch(`https://www.reddit.com/r/rule34/${sort}.json?limit=100`).then(res => res.json()); }
+            if (nsfw) { response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json()); }
             response = response.data?.children?.[Math.floor(Math.random() * response.data?.children?.length)]?.data;
             let author = await fetch(`https://www.reddit.com/u/${response?.author}/about.json`).then(res => res.json());
 
