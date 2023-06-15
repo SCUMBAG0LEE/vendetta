@@ -17,15 +17,17 @@ function sendReply(channelID, content, embed) {
     msg.author.avatar = 'SUSV';
     Avatars.BOT_AVATARS.SUSV = 'https://pbs.twimg.com/media/Eys2THcXMAYPius.jpg';
 
-    if (typeof content === 'string') {
+    if (typeof content === 'string') 
+    {
         msg.content = content;
-    } else {
+    } 
+    else 
+    {
         Object.assign(msg, content);
     }
 
     MessageActions.receiveMessage(channel, msg);
 }
-
 
 let commands = []
 
@@ -34,14 +36,16 @@ commands.push(registerCommand({
     displayName: "hentai",
     description: "Get a hentai content",
     displayDescription: "Get a hentai content",
-    options: [{
+    options: 
+    [{
         name: "sort",
         displayName: "sort",
         description: "Changes the way reddit sorts.",
         displayDescription: "Changes the way reddit sorts",
         required: false,
         type: 3
-    }, {
+    }, 
+    {
         name: "silent",
         displayName: "silent",
         description: "Makes it so only you can see the message.",
@@ -52,35 +56,33 @@ commands.push(registerCommand({
     applicationId: "-1",
     inputType: 1,
     type: 1,
-    execute: async (args, ctx) => {
-        try {
-            //some code taken from emnity gotfemboys plugin by spinfal & was modified with the help of meqativ 
-            let nsfw = args.find(arg => arg.name === "nsfw")?.value
-            let sort = args.find(arg => arg.name === "sort")?.value
-            let silent = args.find(arg => arg.name === "silent")?.value
+    execute: async (args, ctx) => 
+        {
+            try 
+            {
+                let sort = args.find(arg => arg.name === "sort")?.value
+                let silent = args.find(arg => arg.name === "silent")?.value
 
-            if (typeof sort === "undefined") sort = storage.sortdefs;
-            if (!["best", "hot", "new", "rising", "top", "controversial"].includes(sort)) {
-                sendReply(ctx.channel.id, "Incorrect sorting type. Valid options are\n`best`, `hot`, `new`, `rising`, `top`, `controversial`.", [])
-                return
-            }
+                if (typeof sort === "undefined") sort = storage.sortdefs;
+                if (!["best", "hot", "new", "rising", "top", "controversial"].includes(sort)) 
+                {
+                    sendReply(ctx.channel.id, "Incorrect sorting type. Valid options are\n`best`, `hot`, `new`, `rising`, `top`, `controversial`.", [])
+                    return
+           }
+            
             let response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json());
-            if (!ctx.channel.nsfw_ && nsfw && storage.nsfwwarn && !(silent ?? true)) {
-                sendReply(ctx.channel.id, "This channel is not marked as NSFW\n(You can disable this check in plugin settings)", [])
-                return
-            }
 
-            if (silent ?? true) {
-                sendReply(ctx.channel.id, "", [{
-                    type: "rich",
-                    title: response?.title,
-                    url: `https://reddit.com${response?.permalink}`,
-                    author: {
+            if (silent ?? true) 
+            {
+                sendReply(ctx.channel.id, "", [{type: "rich", title: response?.title, url: `https://reddit.com${response?.permalink}`,
+                    author: 
+                    {
                         name: `u/${response?.author} • r/${response?.subreddit}`,
                         proxy_icon_url: author?.data.icon_img.split('?')[0],
                         icon_url: author?.data.icon_img.split('?')[0]
                     },
-                    image: {
+                    image: 
+                    {
                         proxy_url: response?.url_overridden_by_dest.replace(/.gifv$/g, ".gif") ?? response?.url.replace(/.gifv$/g, ".gif"),
                         url: response?.url_overridden_by_dest?.replace(/.gifv$/g, ".gif") ?? response?.url?.replace(/.gifv$/g, ".gif"),
                         width: response?.preview?.images?.[0]?.source?.width,
@@ -88,27 +90,34 @@ commands.push(registerCommand({
                     },
                     color: "0xf4b8e4"
                 }])
-            } else {
-                MessageActions.sendMessage(ctx.channel.id, {
+            } 
+            else 
+            {
+                MessageActions.sendMessage(ctx.channel.id, 
+                {
                     content: response?.url_overridden_by_dest ?? response?.url
                 })
             }
 
-
-        } catch (err) {
+        } 
+        catch (err) 
+        {
             logger.log(err);
-            sendReply(ctx.channel.id, "ERROR !!!!!!!!!!!! 😭😭😭 Check debug logs!! 🥺🥺🥺", [])
+            sendReply(ctx.channel.id, "ERROR", [])
         }
     }
 }))
 
 export const settings = Settings;
 
-export const onLoad = () => {
-    storage.nsfwwarn ??= true
-    storage.sortdefs ??= "new"
-}
+export const onLoad = () => 
+    {
+        storage.nsfwwarn ??= true
+        storage.sortdefs ??= "new"
+    }
 
-export const onUnload = () => {
-    for (const unregisterCommands of commands) unregisterCommands()
-}
+export const onUnload = () => 
+    {
+        for (const unregisterCommands of commands) 
+            unregisterCommands()
+    }
