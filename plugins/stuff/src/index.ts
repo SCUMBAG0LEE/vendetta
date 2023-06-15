@@ -2,7 +2,7 @@
 import { registerCommand } from "@vendetta/commands"
 import { logger } from "@vendetta";
 import { findByProps } from "@vendetta/metro"
-import Settings from "./settings.tsx";
+import Settings from "./settings";
 import { storage } from '@vendetta/plugin';
 
 const MessageActions = findByProps("sendMessage", "receiveMessage")
