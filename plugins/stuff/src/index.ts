@@ -54,6 +54,7 @@ commands.push(registerCommand({
     type: 1,
     execute: async (args, ctx) => {
         try {
+            //some code taken from emnity gotfemboys plugin by spinfal & was modified with the help of meqativ 
             let nsfw = true
             let sort = args.find(arg => arg.name === "sort")?.value
             let silent = args.find(arg => arg.name === "silent")?.value
@@ -64,6 +65,11 @@ commands.push(registerCommand({
                 return
             }
             let response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json());
+            if (!ctx.channel.nsfw_ && nsfw && storage.nsfwwarn && !(silent ?? true)) {
+                sendReply(ctx.channel.id, "This channel is not marked as NSFW\n(You can disable this check in plugin settings)", [])
+                return
+            }
+
             response = response.data?.children?.[Math.floor(Math.random() * response.data?.children?.length)]?.data;
             let author = await fetch(`https://www.reddit.com/u/${response?.author}/about.json`).then(res => res.json());
 
