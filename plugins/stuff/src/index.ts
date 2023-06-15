@@ -13,9 +13,9 @@ const Avatars = findByProps("BOT_AVATARS")
 function sendReply(channelID, content, embed) {
     const channel = channelID ?? Channels?.getChannelId?.();
     const msg = BotMessage.createBotMessage({ channelId: channel, content: '', embeds: embed });
-    msg.author.username = 'pusi';
-    msg.author.avatar = 'cat';
-    Avatars.BOT_AVATARS.cat = 'https://www.tynker.com/projects/screenshot/6138be9044223d53fb37fae0/cat-sus.png';
+    msg.author.username = 'Homie';
+    msg.author.avatar = 'SUSV';
+    Avatars.BOT_AVATARS.SUSV = 'https://www.tynker.com/projects/screenshot/6138be9044223d53fb37fae0/cat-sus.png';
 
     if (typeof content === 'string') {
         msg.content = content;
@@ -35,13 +35,6 @@ commands.push(registerCommand({
     description: "Get a hentai content",
     displayDescription: "Get a hentai content",
     options: [{
-        name: "nsfw",
-        displayName: "nsfw",
-        description: "will do nothing",
-        displayDescription: "did nothing",
-        required: false,
-        type: 5
-    }, {
         name: "sort",
         displayName: "sort",
         description: "Changes the way reddit sorts.",
@@ -76,9 +69,6 @@ commands.push(registerCommand({
                 sendReply(ctx.channel.id, "This channel is not marked as NSFW\n(You can disable this check in plugin settings)", [])
                 return
             }
-            if (nsfw) { response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json()); }
-            response = response.data?.children?.[Math.floor(Math.random() * response.data?.children?.length)]?.data;
-            let author = await fetch(`https://www.reddit.com/u/${response?.author}/about.json`).then(res => res.json());
 
             if (silent ?? true) {
                 sendReply(ctx.channel.id, "", [{
