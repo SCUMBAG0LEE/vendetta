@@ -10,7 +10,8 @@ const Channels = findByProps('getLastSelectedChannelId')
 const BotMessage = findByProps('createBotMessage')
 const Avatars = findByProps("BOT_AVATARS")
 
-function sendReply(channelID, content, embed) {
+function sendReply(channelID, content, embed) 
+{
     const channel = channelID ?? Channels?.getChannelId?.();
     const msg = BotMessage.createBotMessage({ channelId: channel, content: '', embeds: embed });
     msg.author.username = 'Homie';
