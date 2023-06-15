@@ -108,7 +108,7 @@ commands.push(registerCommand({
         catch (err) 
         {
             logger.log(err);
-            sendReply(ctx.channel.id, "Error, Try Check The Debug Log", [])
+            sendReply(ctx.channel.id, "Error, Try Check The Debug Log For More Information", [])
         }
     }
 }))
