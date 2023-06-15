@@ -30,10 +30,10 @@ function sendReply(channelID, content, embed) {
 let commands = []
 
 commands.push(registerCommand({
-    name: "rule34",
-    displayName: "rule34",
-    description: "Get an rule34 image",
-    displayDescription: "Get a rule34 image",
+    name: "hentai",
+    displayName: "hentai",
+    description: "Get a hentai content",
+    displayDescription: "Get a hentai content",
     options: [{
         name: "silent",
         displayName: "silent",
