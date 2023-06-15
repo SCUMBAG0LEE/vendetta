@@ -64,12 +64,15 @@ commands.push(registerCommand({
                 let sort = args.find(arg => arg.name === "sort")?.value
                 let silent = args.find(arg => arg.name === "silent")?.value
 
-                if (typeof sort === "undefined") sort = storage.sortdefs;
+                if (typeof sort === "undefined") 
+                {
+                    sort = storage.sortdefs;
+                }
                 if (!["best", "hot", "new", "rising", "top", "controversial"].includes(sort)) 
                 {
                     sendReply(ctx.channel.id, "Incorrect sorting type. Valid options are\n`best`, `hot`, `new`, `rising`, `top`, `controversial`.", [])
                     return
-           }
+                }
             
             let response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json());
             response = response.data?.children?.[Math.floor(Math.random() * response.data?.children?.length)]?.data;
