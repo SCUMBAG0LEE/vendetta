@@ -30,24 +30,25 @@ function sendReply(channelID, content, embed) {
 let commands = []
 
 commands.push(registerCommand({
-    name: "hentai",
-    displayName: "hentai",
-    description: "Get a hentai content",
-    displayDescription: "Get a hentai content",
+    name: "rule34",
+    displayName: "rule34",
+    description: "Get an rule34 image",
+    displayDescription: "Get a rule34 image",
     options: [{
-        name: "sort",
-        displayName: "sort",
-        description: "Changes the way reddit sorts.",
-        displayDescription: "Changes the way reddit sorts",
-        required: false,
-        type: 3
-    }, {
         name: "silent",
         displayName: "silent",
         description: "Makes it so only you can see the message.",
         displayDescription: "Makes it so only you can see the message.",
         required: false,
         type: 5
+    },
+    {
+        name: "sort",
+        displayName: "sort",
+        description: "Changes the way reddit sorts.",
+        displayDescription: "Changes the way reddit sorts",
+        required: false,
+        type: 3
     }],
     applicationId: "-1",
     inputType: 1,
@@ -69,7 +70,7 @@ commands.push(registerCommand({
                 sendReply(ctx.channel.id, "This channel is not marked as NSFW\n(You can disable this check in plugin settings)", [])
                 return
             }
-
+            if (nsfw) { response = await fetch(`https://www.reddit.com/r/hentai/${sort}.json?limit=100`).then(res => res.json()); }
             response = response.data?.children?.[Math.floor(Math.random() * response.data?.children?.length)]?.data;
             let author = await fetch(`https://www.reddit.com/u/${response?.author}/about.json`).then(res => res.json());
 
