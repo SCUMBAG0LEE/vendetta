@@ -13,7 +13,7 @@ const Avatars = findByProps("BOT_AVATARS")
 function sendReply(channelID, content, embed) {
     const channel = channelID ?? Channels?.getChannelId?.();
     const msg = BotMessage.createBotMessage({ channelId: channel, content: '', embeds: embed });
-    msg.author.username = 'Homie';
+    msg.author.username = 'homie';
     msg.author.avatar = 'ASV';
     Avatars.BOT_AVATARS.ASV = 'https://pbs.twimg.com/media/Eys2THcXMAYPius.jpg';
 
